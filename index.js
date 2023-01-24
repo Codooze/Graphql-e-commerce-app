@@ -1,62 +1,12 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { db } from "./db.js";
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
-const typeDefs = `#graphql
-  
-  type Product { 
-    id: ID!
-    name: String!
-    description: String!
-    quatity: Int!
-    price: Float!
-    image: String!
-    onSale: Boolean!
-    category: Category
-  }
+import { typeDefs } from "./schema.js";
+import { Product } from "./resolvers/Product.js";
+import { Category } from "./resolvers/Category.js";
+import { Query } from "./resolvers/Query.js";
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. 
-  type Query {
-    products: [Product!]!
-    product(id: ID!): Product
-    categories: [Category!]!
-    category(id: ID!): Category
-  }
-
-  type Category {
-    id: ID!
-    name: String!
-    products: [Product!]!
-  }
-`;
 // Resolvers define how to fetch the types defined in your schema.
-const resolvers = {
-  Query: {
-    products: () => db.products,
-    product: (parent, { id }) =>
-      db.products.find((product) => product.id === id),
-    categories: () => db.categories,
-    category: (parent, { id }) =>
-      db.categories.find((category) => category.id === id),
-  },
-  Category: {
-    // parent is the category
-    products: (parent) => {
-      return db.products.filter((product) => product.categoryId === parent.id);
-    },
-  },
-  Product: {
-    // parent is the product
-    category: (parent) => {
-      return db.categories.find(
-        (category) => category.id === parent.categoryId
-      );
-    },
-  },
-};
+const resolvers = { Product, Category, Query };
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
