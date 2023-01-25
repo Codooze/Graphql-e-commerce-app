@@ -12,6 +12,7 @@ export const typeDefs = `#graphql
     image: String!
     onSale: Boolean!
     category: Category
+    reviews: [Review!]!
   }
 
   type Category {
@@ -19,6 +20,15 @@ export const typeDefs = `#graphql
     name: String!
     products: [Product!]!
   }
+
+  type Review{
+    id: ID!
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+  }
+
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. 
   type Query {

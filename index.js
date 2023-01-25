@@ -4,7 +4,7 @@ import { typeDefs } from "./schema.js";
 import Product from "./resolvers/Product.js";
 import { Category } from "./resolvers/Category.js";
 import { Query } from "./resolvers/Query.js";
-import { products, categories } from "./db.js";
+import { products, categories, reviews } from "./db.js";
 
 // Resolvers define how to fetch the types defined in your schema.
 const resolvers = { Product, Category, Query };
@@ -23,7 +23,7 @@ const server = new ApolloServer({
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
   context: async () => {
-    return { products, categories };
+    return { products, categories, reviews };
   },
 });
 
