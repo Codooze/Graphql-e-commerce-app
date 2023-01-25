@@ -18,7 +18,7 @@ export const typeDefs = `#graphql
   type Category {
     id: ID!
     name: String!
-    products: [Product!]!
+    products(filter: ProductsFilterInput): [Product!]!
   }
 
   type Review{
@@ -32,9 +32,13 @@ export const typeDefs = `#graphql
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. 
   type Query {
-    products: [Product!]!
+    products(filter: ProductsFilterInput): [Product!]!
     product(id: ID!): Product
     categories: [Category!]!
     category(id: ID!): Category
+  }
+
+  input ProductsFilterInput{
+    onSale: Boolean
   }
 `;

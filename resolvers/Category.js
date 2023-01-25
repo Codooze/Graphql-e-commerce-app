@@ -2,8 +2,12 @@
 
 export const Category = {
   // parent is the category
-  products: (parent, _, contextValue) => {
+  products: (parent, { filter }, contextValue) => {
     const { products } = contextValue;
-    return products.filter((product) => product.categoryId === parent.id);
+    if (!filter) return products;
+    return products.filter(
+      (product) =>
+        product.categoryId === parent.id && product.onSale === filter.onSale
+    );
   },
 };
