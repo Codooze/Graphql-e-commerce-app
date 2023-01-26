@@ -40,5 +40,6 @@ export const typeDefs = `#graphql
 
   input ProductsFilterInput{
     onSale: Boolean
+    aveRating: Int
   }
 `;
