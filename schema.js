@@ -38,8 +38,16 @@ export const typeDefs = `#graphql
     category(id: ID!): Category
   }
 
+  type Mutation {
+    addCategory(input: AddCategoryInput!): Category
+  }
+
   input ProductsFilterInput{
     onSale: Boolean
     aveRating: Int
+  }
+
+  input AddCategoryInput {
+    name: String!
   }
 `;

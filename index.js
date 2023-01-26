@@ -4,10 +4,11 @@ import { typeDefs } from "./schema.js";
 import Product from "./resolvers/Product.js";
 import { Category } from "./resolvers/Category.js";
 import { Query } from "./resolvers/Query.js";
+import { Mutation } from "./resolvers/Mutation.js";
 import { products, categories, reviews } from "./db.js";
 
 // Resolvers define how to fetch the types defined in your schema.
-const resolvers = { Product, Category, Query };
+const resolvers = { Product, Category, Query, Mutation };
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
