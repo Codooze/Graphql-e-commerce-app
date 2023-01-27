@@ -71,5 +71,33 @@ export const Mutation = {
     console.log(deletedReview);
     return true;
   },
+
+  updateCategory: (parent, { id, input }, { categories }) => {
+    console.log("Running updateCategory");
+    const category = categories.find(
+      //find the category that matches the id
+      (category) => category.id === id
+    );
+    if (!category) return null;
+    category.name = input.name;
+    return category;
+  },
+
+  updateProduct: (parent, { id, input }, { products }) => {
+    console.log("Running updateProduct");
+    const product = products.find(
+      //find the product that matches the id
+      (product) => product.id === id
+    );
+    if (!product) return null;
+    product.name = input.name;
+    product.description = input.description;
+    product.quatity = input.quatity;
+    product.price = input.price;
+    product.image = input.image;
+    product.onSale = input.onSale;
+    product.categoryId = input.categoryId;
+    return product;
+  },
 };
 //

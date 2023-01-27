@@ -45,6 +45,8 @@ export const typeDefs = `#graphql
     deleteCategory(id: ID!): Boolean!
     deleteProduct(id: ID!): Boolean!
     deleteReview(id: ID!): Boolean!
+    updateCategory(id: ID!, input: AddCategoryInput!): Category
+    updateProduct(id: ID!, input: AddProductInput!): Product
   }
 
   input ProductsFilterInput{
@@ -70,5 +72,19 @@ export const typeDefs = `#graphql
     title: String!
     comment: String!
     rating: Int!
+  }
+
+  input UpdateCategoryInput {
+    name: String!
+  }
+
+  input UpdateProductInput {
+    name: String!
+    description: String!
+    quatity: Int!
+    price: Float!
+    image: String!
+    onSale: Boolean!
+    categoryId: ID!
   }
 `;
